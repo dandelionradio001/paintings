@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Paintings — Online Museum</title>
+<meta name="description" content="Paintings — Online Museum. Thousands of masterpieces from the world's greatest artists, right in your pocket. Browse by artist, museum and album, zoom into high-resolution artworks, read curator notes, and build your own collection." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #15171B;
+    --bg-elev: #1E2127;
+    --bg-card: #262A31;
+    --ink: #F3F0E8;
+    --muted: #A9A28F;
+    --accent: #B6842B;
+    --accent-soft: #E3C37A;
+    --border: #3A3F47;
+    --shadow: rgba(0, 0, 0, 0.5);
+    --maxw: 1080px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background:
+      radial-gradient(1200px 600px at 50% -10%, rgba(227, 195, 122, 0.10), transparent 60%),
+      var(--bg);
+    color: var(--ink);
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+  .serif { font-family: "Cormorant Garamond", Georgia, serif; }
+
+  .rule {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    color: var(--accent-soft);
+  }
+  .rule::before, .rule::after {
+    content: "";
+    height: 1px;
+    width: 64px;
+    background: linear-gradient(90deg, transparent, rgba(227, 195, 122, 0.55));
+  }
+  .rule::after { background: linear-gradient(90deg, rgba(227, 195, 122, 0.55), transparent); }
+  .rule span {
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent-soft);
+  }
+
+  /* ---------- Header ---------- */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    backdrop-filter: saturate(140%) blur(12px);
+    background: rgba(21, 23, 27, 0.72);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand .logo {
+    width: 34px; height: 34px; border-radius: 9px;
+    background: linear-gradient(135deg, var(--accent-soft), var(--accent));
+    display: grid; place-items: center;
+    color: #1b1a16; font-size: 18px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+  }
+  .brand .name { font-size: 18px; font-weight: 500; letter-spacing: 0.3px; }
+  .nav .links { display: flex; gap: 26px; font-size: 14px; color: var(--muted); }
+  .nav .links a:hover { color: var(--ink); }
+  @media (max-width: 640px) { .nav .links { display: none; } }
+
+  /* ---------- Hero ---------- */
+  .hero { text-align: center; padding: 84px 0 64px; }
+  .hero .eyebrow {
+    font-size: 12px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--accent-soft); margin-bottom: 22px;
+  }
+  .hero h1 {
+    font-size: clamp(42px, 7vw, 76px);
+    font-weight: 500;
+    font-style: italic;
+    line-height: 1.05;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+  }
+  .hero .sub {
+    font-size: clamp(16px, 2.4vw, 20px);
+    color: var(--muted);
+    max-width: 620px;
+    margin: 18px auto 34px;
+  }
+  .cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 26px; border-radius: 999px;
+    background: linear-gradient(135deg, var(--accent-soft), var(--accent));
+    color: #1b1a16; font-weight: 600; font-family: "Inter", sans-serif;
+    font-size: 15px; letter-spacing: 0.2px;
+    box-shadow: 0 10px 30px rgba(182, 132, 43, 0.35);
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .cta:hover { transform: translateY(-2px); box-shadow: 0 14px 38px rgba(182, 132, 43, 0.45); }
+
+  .hero-shot {
+    margin: 56px auto 0;
+    max-width: 320px;
+  }
+  .hero-shot img {
+    width: 100%;
+    border-radius: 34px;
+    border: 1px solid var(--border);
+    box-shadow: 0 40px 80px -20px var(--shadow);
+  }
+
+  /* ---------- Sections ---------- */
+  section { padding: 72px 0; }
+  .section-head { text-align: center; margin-bottom: 48px; }
+  .section-head h2 {
+    font-size: clamp(28px, 4.5vw, 40px);
+    font-weight: 500; font-style: italic; letter-spacing: 0.3px;
+    margin: 16px 0 12px;
+  }
+  .section-head p { color: var(--muted); max-width: 600px; margin: 0 auto; }
+
+  /* ---------- Features ---------- */
+  .features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 860px) { .features { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .features { grid-template-columns: 1fr; } }
+  .feature {
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 26px 24px;
+    transition: transform .2s ease, border-color .2s ease;
+  }
+  .feature:hover { transform: translateY(-3px); border-color: rgba(227,195,122,0.4); }
+  .feature .ic {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: rgba(227, 195, 122, 0.12);
+    color: var(--accent-soft);
+    display: grid; place-items: center; font-size: 22px;
+    margin-bottom: 16px;
+  }
+  .feature h3 { font-size: 18px; font-weight: 500; margin-bottom: 8px; color: var(--ink); }
+  .feature p { font-size: 14.5px; color: var(--muted); }
+
+  /* ---------- Screenshots ---------- */
+  .shots {
+    display: flex;
+    gap: 22px;
+    overflow-x: auto;
+    padding: 10px 4px 26px;
+    scroll-snap-type: x mandatory;
+  }
+  .shots::-webkit-scrollbar { height: 8px; }
+  .shots::-webkit-scrollbar-thumb { background: var(--border); border-radius: 999px; }
+  .shot {
+    flex: 0 0 auto;
+    width: 250px;
+    scroll-snap-align: center;
+    text-align: center;
+  }
+  .shot img {
+    width: 100%;
+    border-radius: 28px;
+    border: 1px solid var(--border);
+    box-shadow: 0 30px 60px -22px var(--shadow);
+    transition: transform .25s ease;
+  }
+  .shot img:hover { transform: translateY(-6px) scale(1.01); }
+  .shot .cap {
+    margin-top: 16px;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ---------- Support ---------- */
+  .support-card {
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 44px 32px;
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .support-card p { color: var(--muted); margin-bottom: 22px; }
+  .support-card .email {
+    display: inline-block;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 24px; font-style: italic;
+    color: var(--accent-soft);
+    border-bottom: 1px solid rgba(227,195,122,0.4);
+    padding-bottom: 2px;
+  }
+  .faq { max-width: 720px; margin: 40px auto 0; }
+  .faq details {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--bg-elev);
+    padding: 4px 20px;
+    margin-bottom: 12px;
+  }
+  .faq summary {
+    cursor: pointer;
+    padding: 16px 0;
+    font-size: 16px;
+    font-weight: 400;
+    list-style: none;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: "+"; color: var(--accent-soft); font-size: 22px; }
+  .faq details[open] summary::after { content: "–"; }
+  .faq p { color: var(--muted); font-size: 14.5px; padding: 0 0 18px; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 0;
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  footer .fbrand {
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic; font-size: 20px; color: var(--ink);
+    margin-bottom: 8px;
+  }
+  footer a { color: var(--accent-soft); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <div class="logo serif">P</div>
+      <div class="name">Paintings</div>
+    </div>
+    <nav class="links">
+      <a href="#features">Features</a>
+      <a href="#screens">Screenshots</a>
+      <a href="#support">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="eyebrow">Online Museum</div>
+      <h1 class="serif">Paintings</h1>
+      <div class="rule"><span>Masterpieces in your pocket</span></div>
+      <p class="sub">A world-class art collection that fits in your pocket. Browse thousands of masterpieces from history's greatest artists — beautifully presented, endlessly explorable, and always with you.</p>
+      <a class="cta" href="https://apps.apple.com/app/id6788667327" target="_blank" rel="noopener">Download on the App Store</a>
+      <div class="hero-shot">
+        <img src="images/01.png" alt="Paintings app gallery screen showing famous artists" />
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="rule"><span>Why Paintings</span></div>
+        <h2 class="serif">A gallery, always open</h2>
+        <p>Everything you love about visiting a museum — the discovery, the detail, the stories — reimagined for your phone.</p>
+      </div>
+      <div class="features">
+        <div class="feature">
+          <div class="ic">🖼️</div>
+          <h3>Explore great art</h3>
+          <p>Browse an extensive collection organized by artist, museum, and album. From the old masters to hidden gems.</p>
+        </div>
+        <div class="feature">
+          <div class="ic">🔍</div>
+          <h3>See every detail</h3>
+          <p>Open any artwork in stunning high resolution and pinch to zoom in on every brushstroke and texture.</p>
+        </div>
+        <div class="feature">
+          <div class="ic">📖</div>
+          <h3>Read the story</h3>
+          <p>Each piece includes a catalogue entry — artist, date, collection, and a curator's note for context.</p>
+        </div>
+        <div class="feature">
+          <div class="ic">🎨</div>
+          <h3>Painters &amp; museums</h3>
+          <p>Discover works through an A–Z of painters, or wander the collections of the world's greatest museums.</p>
+        </div>
+        <div class="feature">
+          <div class="ic">❤️</div>
+          <h3>Build your collection</h3>
+          <p>Save your favorite works with a single tap and return to your personal gallery anytime.</p>
+        </div>
+        <div class="feature">
+          <div class="ic">🌙</div>
+          <h3>Made for viewing</h3>
+          <p>A clean, museum-inspired interface with full Light and Dark mode, so the art always takes center stage.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCREENSHOTS -->
+  <section id="screens" style="background: var(--bg-elev); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="rule"><span>Screenshots</span></div>
+        <h2 class="serif">Take a look inside</h2>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="shots">
+        <figure class="shot"><img src="images/01.png" alt="Gallery of famous artists" /><figcaption class="cap">Gallery</figcaption></figure>
+        <figure class="shot"><img src="images/02.png" alt="Leonardo Da Vinci works" /><figcaption class="cap">Artist works</figcaption></figure>
+        <figure class="shot"><img src="images/03.png" alt="A to Z list of painters" /><figcaption class="cap">Painters A–Z</figcaption></figure>
+        <figure class="shot"><img src="images/04.png" alt="World famous museums" /><figcaption class="cap">Museums</figcaption></figure>
+        <figure class="shot"><img src="images/05.png" alt="Artwork detail with catalogue entry" /><figcaption class="cap">Artwork detail</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUPPORT -->
+  <section id="support">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="rule"><span>Support</span></div>
+        <h2 class="serif">We're here to help</h2>
+        <p>Questions, feedback, or need a hand? Reach out and we'll get back to you.</p>
+      </div>
+      <div class="support-card">
+        <p>For any support inquiries, please contact us at:</p>
+        <a class="email" href="mailto:douglassmaster001@126.com">douglassmaster001@126.com</a>
+      </div>
+
+      <div class="faq">
+        <details>
+          <summary>Is Paintings free to use?</summary>
+          <p>Yes. You can browse the collection, view artworks, and build your favorites right after installing.</p>
+        </details>
+        <details>
+          <summary>Why won't some images load?</summary>
+          <p>Artwork images are streamed from the web, so a stable internet connection is required. If an image doesn't appear, check your connection and pull down to refresh.</p>
+        </details>
+        <details>
+          <summary>Can I save artworks to my device?</summary>
+          <p>Yes. Open any artwork, tap to view it full-screen, and use the download button to save it to your Photos.</p>
+        </details>
+        <details>
+          <summary>How do I switch between Light and Dark mode?</summary>
+          <p>Go to the “My” tab → Appearance, and choose Light, Dark, or System to match your device.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fbrand">Paintings — Online Museum</div>
+    <div>Copyright © 2026 Paintings. All rights reserved.</div>
+    <div style="margin-top:8px;">
+      <a href="https://apps.apple.com/app/id6788667327" target="_blank" rel="noopener">App Store</a>
+      &nbsp;·&nbsp;
+      <a href="mailto:douglassmaster001@126.com">Contact</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
